@@ -57,14 +57,14 @@ public class PersistentTransactionDAO implements TransactionDAO {
             SimpleDateFormat formatter = new SimpleDateFormat("DD-MM-YYYY");
             Date date = null;
             try {
-                date = formatter.parse(dataCursor.getString(1));
+                date = new Date(dataCursor.getString(0));
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
-            String accountNumber = dataCursor.getString(2);
-            ExpenseType expenseType = dataCursor.getString(3) == ExpenseType.EXPENSE.toString() ? ExpenseType.EXPENSE : ExpenseType.INCOME;
-            double amount = Double.parseDouble(dataCursor.getString(4));
+            String accountNumber = dataCursor.getString(1);
+            ExpenseType expenseType = dataCursor.getString(2) == ExpenseType.EXPENSE.toString() ? ExpenseType.EXPENSE : ExpenseType.INCOME;
+            double amount = Double.parseDouble(dataCursor.getString(3));
             Transaction transaction = new Transaction(date, accountNumber, expenseType, amount);
             transactions.add(transaction);
         }
