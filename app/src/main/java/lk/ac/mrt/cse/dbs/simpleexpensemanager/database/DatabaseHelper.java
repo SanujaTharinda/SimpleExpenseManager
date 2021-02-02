@@ -7,11 +7,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.Nullable;
 
-import java.util.Date;
-
 import lk.ac.mrt.cse.dbs.simpleexpensemanager.data.EMDatabaseHelper;
 import lk.ac.mrt.cse.dbs.simpleexpensemanager.data.model.Account;
-import lk.ac.mrt.cse.dbs.simpleexpensemanager.data.model.ExpenseType;
+
 
 public class DatabaseHelper extends SQLiteOpenHelper implements EMDatabaseHelper {
     public static final int DATABASE_VERSION = 1;
@@ -100,7 +98,9 @@ public class DatabaseHelper extends SQLiteOpenHelper implements EMDatabaseHelper
                         " WHERE " + EMContract.AccountEntry.COLUMN_NAME_ACCOUNT_NUMBER + "=" + "?";
         String[] args = {amount, accountNumber};
         SQLiteDatabase database = this.getWritableDatabase();
-        database.rawQuery(query, args);
+        Cursor cursor = database.rawQuery(query, args);
+        cursor.moveToFirst();
+        cursor.close();
     }
 
     @Override
@@ -111,7 +111,9 @@ public class DatabaseHelper extends SQLiteOpenHelper implements EMDatabaseHelper
                         " WHERE " + EMContract.AccountEntry.COLUMN_NAME_ACCOUNT_NUMBER + "=" + "?";
         String[] args = {amount, accountNumber};
         SQLiteDatabase database = this.getWritableDatabase();
-        database.rawQuery(query, args);
+        Cursor cursor = database.rawQuery(query, args);
+        cursor.moveToFirst();
+        cursor.close();
     }
 
     @Override
